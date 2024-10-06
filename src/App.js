@@ -1,5 +1,6 @@
 import './App.css';
 import {Object} from './User'
+import { useState } from 'react';
 
 function App() {
   const name = <h1 className="name">Luke</h1>;
@@ -44,7 +45,34 @@ function App() {
     {name: 'name3', age: 31},
   ]
 
-  
+  // useState hook
+  // const money = 0;
+  const [money, setMoney] = useState(0); 
+
+  const increaseMoney = () => {
+    // money = money + 1;
+    // console.log(money)
+    setMoney(money + 1);
+  }
+
+  // state for input
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (event) => {
+    // below can be used to grab information from a form
+    setInputValue(event.target.value)
+  };
+
+  // show / hide text
+  const [showText, setShowText] = useState(true);
+
+  const showOrHideText = () => {
+    // flip showText to true or false
+    setShowText(!showText);
+  }
+
+  // chaging color directly within onClick function
+  const [textColor, setTextColor] = useState("red");
 
   return (
     <div className="App">
@@ -67,6 +95,25 @@ function App() {
       return <Object name={value.name} age={value.age}/>
 
     })}
+
+    <h1>Priting out useState money example</h1>
+    <h3>{money}</h3><button onClick={increaseMoney}>increase money</button>
+    
+    <h1>Testing input with useState</h1>
+    <input type='text' onChange={handleInputChange}/>
+    {inputValue}
+
+    <h1>Show / Hide Example</h1>
+    <button onClick={showOrHideText} >Show / Hide</button>
+    {showText && <h1>Hello World</h1>}
+
+
+    <h1>Example for changing color</h1>
+    {/* example 1 */}
+    {/* <button onClick={() => { setTextColor("green")}}>Change color</button> */}
+    {/* example 2 */}
+    <button onClick={() => { setTextColor(textColor === "red" ? "green" : "red")}}>Change color</button>
+    <h1 style={{color: textColor}}>RED to GREEN</h1>
     </div>
   );
 
